@@ -29,10 +29,10 @@ const DEMO_ANALYSIS = `## Kết quả phân tích da mặt ✨
 
 **Nên tránh:** Rượu cồn cao, hương liệu mạnh nếu da nhạy cảm
 
-**Lưu ý:** Đây là phân tích demo (chưa kết nối API). Thêm \`VITE_OPENAI_API_KEY\` vào file \`.env\` để dùng AI thật.`;
+**Lưu ý:** Đây là phân tích demo (chưa kết nối API). Thêm \`VITE_GEMINI_API_KEY\` vào file \`.env\` để dùng AI thật.`;
 
 function hasApiKey() {
-  return Boolean(import.meta.env.VITE_OPENAI_API_KEY);
+  return Boolean(import.meta.env.VITE_GEMINI_API_KEY);
 }
 
 async function callOpenAI(messages) {
@@ -40,7 +40,7 @@ async function callOpenAI(messages) {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      model: "gpt-4o-mini",
+      model: "gemini-2.5-flash",
       max_tokens: 1200,
       messages,
     }),
@@ -105,7 +105,7 @@ export async function sendFollowUp(chatHistory) {
     await new Promise((r) => setTimeout(r, 1200));
     return {
       content:
-        "Cảm ơn bạn đã hỏi thêm! Ở chế độ demo, tôi chưa thể trả lời chi tiết. Hãy thêm **VITE_OPENAI_API_KEY** vào file `.env` và khởi động lại server để chat AI hoạt động đầy đủ.",
+        "Cảm ơn bạn đã hỏi thêm! Ở chế độ demo, tôi chưa thể trả lời chi tiết. Hãy thêm **VITE_GEMINI_API_KEY** vào file `.env` và khởi động lại server để chat AI hoạt động đầy đủ.",
       isDemo: true,
     };
   }
